@@ -1,122 +1,67 @@
-import React, { useState } from "react";
-import { View, StyleSheet, FlatList, Dimensions } from "react-native";
-import { Image, Text, Button } from "react-native-elements";
-
-const SCREEN = Dimensions.get("screen");
+import React, { useEffect, useState } from "react";
+import { View, StyleSheet, FlatList, ScrollView } from "react-native";
+import { Image, Text } from "react-native-elements";
+import { SafeAreaView } from "react-native-safe-area-context";
+import ListCategorys from "../components/categorys/ListCategorys";
+import FooterHome from "../components/home/FooterHome";
+import ListProducts from "../components/products/ListProdutcs";
+import { SCREEN } from "../utils/common";
 
 export default function Home() {
-  const [categorys, setCategorys] = useState(mockDataCategorys());
-  console.log(categorys);
-  return (
-    <View style={styles.container}>
-      <Image
-        style={styles.landingImage}
-        resizeMode="contain"
-        containerStyle={styles.containerLanding}
-        source={require("../../assets/landing.jpg")}
-      />
-      <View style={styles.containerCategorys}>
-        <Text h4>Seleccione una categoria</Text>
-
-        <FlatList
-          data={mockDataCategorys()}
-          renderItem={CategoryElement}
-          keyExtractor={(index, i) => i.toString()}
-          horizontal
-        />
-      </View>
-      <View style={styles.containerProducts}>
-        <FlatList
-          data={mockDataCategorys()}
-          renderItem={ProductElement}
-          keyExtractor={(index, i) => i.toString()}
-        />
-      </View>
-    </View>
-  );
-}
-
-function CategoryElement(item) {
-  return (
-    <View style={styles.containeritemCategory}>
-      <Text style={{ textAlign: "center" }}>Categoria pruebas</Text>
-    </View>
-  );
-}
-function ProductElement() {
-  return (
-    <View style={styles.containerItemProduct}>
-      <View style={styles.containerContentProduct}>
-        <View style={styles.containerProducts}>
-          <Image
-            source={require("../../assets/landing.jpg")}
-            resizeMode="contain"
-            style={{ height: "100%", width: 150 }}
-          />
+    const [categorys, setCategorys] = useState([]);
+    useEffect(() => {
+        setCategorys(mockDataCategorys);
+    }, []);
+    return (
+        <View style={styles.container}>
+            <Image
+                style={styles.landingImage}
+                resizeMode="contain"
+                containerStyle={styles.containerLanding}
+                source={require("../../assets/landing.png")}
+            />
+            <View style={styles.containerCategorys}>
+                <Text h4>Seleccione una categoria</Text>
+                <ListCategorys data={categorys} />
+            </View>
+            <View style={styles.containerProducts}>
+                <ListProducts data={categorys} />
+            </View>
+            <FooterHome />
         </View>
-        <Text style={[{ textAlign: "center" }, styles.containerProducts]}>
-          Producto pruebas
-        </Text>
-        <View style={styles.containerProducts}>
-          <Text style={{ fontWeight: "bold" }}>123456</Text>
-          <Button title="AGREGAR" />
-        </View>
-      </View>
-    </View>
-  );
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 50,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  containerLanding: {
-    flex: 2,
-  },
-  landingImage: {
-    width: 250,
-    height: 250,
-    marginBottom: 30,
-  },
-  containerCategorys: {
-    height: 130,
-    marginBottom: 10,
-  },
-  containeritemCategory: {
-    width: 100,
-    height: 100,
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 2,
-    marginHorizontal: 10,
-  },
-  containerProducts: {
-    flex: 2,
-  },
-  containerItemProduct: {
-    width: SCREEN.width,
-    height: 150,
-    borderWidth: 2,
-  },
-  containerContentProduct: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-  },
-});
+    container: {
+        flex: 1,
+    },
+    containerLanding: {
+        flex: 0,
+        height: SCREEN.height / 3.7,
 
+        backgroundColor: "grey",
+    },
+    landingImage: {
+        width: "100%",
+        height: SCREEN.height / 3.7,
+
+        // backgroundColor: "grey",
+    },
+    containerCategorys: {
+        height: 130,
+        marginBottom: 10,
+    },
+});
 function mockDataCategorys() {
-  const data = [];
-  for (let index = 0; index < 5; index++) {
-    data.push({
-      id: index,
-      name: "categoria " + index,
-      image: require("../../assets/landing-restaurant.jpeg"),
-    });
-  }
-  return data;
+    const data = [];
+    const random = Math.floor(Math.random() * (20 - 1 + 1)) + 1;
+    for (let index = 0; index < random; index++) {
+        data.push({
+            id: index,
+            name: "Pruebas " + index,
+            image: require("../../assets/products/2.png"),
+        });
+    }
+    return data;
 }
