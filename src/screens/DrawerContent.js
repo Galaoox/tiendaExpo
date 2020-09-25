@@ -1,10 +1,11 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Text, Avatar, Icon } from "react-native-elements";
-import { Caption, Drawer, Title } from "react-native-paper";
+import { Caption, Drawer, Paragraph, Title } from "react-native-paper";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 
 export default function DrawerContent(props) {
+    const { navigation } = props;
     return (
         <View style={styles.container}>
             <DrawerContentScrollView {...props}>
@@ -25,7 +26,76 @@ export default function DrawerContent(props) {
                                 </Caption>
                             </View>
                         </View>
+                        {/* <View style={styles.row}>
+                            <View style={styles.section}>
+                                <Paragraph
+                                    style={[styles.paragraph, styles.caption]}
+                                >
+                                    80
+                                </Paragraph>
+                                <Caption style={styles.caption}>
+                                    Following
+                                </Caption>
+                            </View>
+                            <View style={styles.section}>
+                                <Paragraph
+                                    style={[styles.paragraph, styles.caption]}
+                                >
+                                    100
+                                </Paragraph>
+                                <Caption style={styles.caption}>
+                                    Followers
+                                </Caption>
+                            </View>
+                        </View> */}
                     </View>
+                    <Drawer.Section style={styles.drawerSection}>
+                        <DrawerItem
+                            icon={({ color, size }) => (
+                                <Icon
+                                    name="home-outline"
+                                    type="material-community"
+                                    color={color}
+                                    size={size}
+                                />
+                            )}
+                            label="Inicio"
+                            onPress={() => navigation.navigate("home")}
+                        />
+                        <DrawerItem
+                            icon={({ color, size }) => (
+                                <Icon
+                                    name="cart-outline"
+                                    type="material-community"
+                                    color={color}
+                                    size={size}
+                                />
+                            )}
+                            label="Carrito"
+                        />
+                        <DrawerItem
+                            icon={({ color, size }) => (
+                                <Icon
+                                    name="truck-fast"
+                                    type="material-community"
+                                    color={color}
+                                    size={size}
+                                />
+                            )}
+                            label="Pedidos"
+                        />
+                        <DrawerItem
+                            icon={({ color, size }) => (
+                                <Icon
+                                    name="account-outline"
+                                    type="material-community"
+                                    color={color}
+                                    size={size}
+                                />
+                            )}
+                            label="Cuenta"
+                        />
+                    </Drawer.Section>
                 </View>
             </DrawerContentScrollView>
             <Drawer.Section style={styles.bottomDrawerSection}>
