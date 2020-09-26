@@ -71,7 +71,8 @@ export default function DrawerContent(props) {
                                     size={size}
                                 />
                             )}
-                            label="Carrito"
+                            label="Pedido"
+                            onPress={() => navigation.navigate("order")}
                         />
                         <DrawerItem
                             icon={({ color, size }) => (

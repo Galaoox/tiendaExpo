@@ -1,4 +1,5 @@
 import React from "react";
+import ButtonDrawer from "../components/ButtonDrawer";
 import Home from "../screens/Home";
 import Order from "../screens/Order";
 import Product from "../screens/Product";
@@ -11,6 +12,7 @@ export default function HomeStack() {
                 name="home"
                 options={{
                     title: "Bienvenido",
+                    headerLeft: () => <ButtonDrawer />,
                 }}
                 component={Home}
             />
