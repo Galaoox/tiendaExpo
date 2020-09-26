@@ -1,8 +1,13 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Button, Text } from "react-native-elements";
 
 export default function FooterHome() {
+    const navigation = useNavigation();
+    const goOrder = () => {
+        navigation.navigate("order");
+    };
     return (
         <View style={styles.container}>
             <Text style={[styles.orderText]}>Tu orden:</Text>
@@ -10,6 +15,7 @@ export default function FooterHome() {
                 title="Ver pedido"
                 type="solid"
                 buttonStyle={[styles.btn]}
+                onPress={goOrder}
             />
             <Text>
                 <Text style={[styles.valueOrderText]}>Valor:</Text> $30.000

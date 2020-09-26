@@ -7,11 +7,12 @@ import FooterHome from "../components/home/FooterHome";
 import ListProducts from "../components/products/ListProdutcs";
 import { SCREEN } from "../utils/common";
 
-export default function Home() {
+export default function Home(props) {
     const [categorys, setCategorys] = useState([]);
     useEffect(() => {
         setCategorys(mockDataCategorys);
     }, []);
+
     return (
         <View style={styles.container}>
             <Image
@@ -45,8 +46,6 @@ const styles = StyleSheet.create({
     landingImage: {
         width: "100%",
         height: SCREEN.height / 3.7,
-
-        // backgroundColor: "grey",
     },
     containerCategorys: {
         height: 130,

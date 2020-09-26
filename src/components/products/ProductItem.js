@@ -1,9 +1,13 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Text, Image, Button } from "react-native-elements";
+import { useNavigation } from "@react-navigation/native";
 import { SCREEN } from "../../utils/common";
 
 export default function ProductItem({ data }) {
+    const navigation = useNavigation();
+    const goProduct = () =>
+        navigation.navigate("product", { id: data.id, name: data.name });
     return (
         <View style={styles.container}>
             <View style={styles.containerContent}>
@@ -17,7 +21,11 @@ export default function ProductItem({ data }) {
                 <Text style={styles.name}>{data.name}</Text>
                 <View style={styles.containerAction}>
                     <Text style={{ fontWeight: "bold" }}>$15.000</Text>
-                    <Button title="AGREGAR" buttonStyle={styles.btn} />
+                    <Button
+                        title="AGREGAR"
+                        buttonStyle={styles.btn}
+                        onPress={goProduct}
+                    />
                 </View>
             </View>
         </View>

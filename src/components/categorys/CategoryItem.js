@@ -9,7 +9,6 @@ import { Text, Image } from "react-native-elements";
 import OverlayCustom from "../OverlayCustom";
 
 export default function CategoryItem({ data }) {
-    console.log("category", data);
     return (
         <TouchableOpacity>
             <View style={styles.container}>
