@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
+import FooterScreen from "../components/FooterScreen";
 import TableOrder from "../components/order/TableOrder";
 
-export default function Order() {
+export default function Order(props) {
+    const { navigation } = props;
     const [data, setData] = useState(mockData());
 
     const deleteProduct = (id) => {
         setData(data.filter((product) => product.id != id));
+    };
+
+    const confirmOrder = () => {
+        navigation.navigate("order");
     };
 
     const updateProduct = (id, dataUpdate) => {
@@ -21,19 +27,33 @@ export default function Order() {
     };
 
     return (
-        <View>
+        <View style={styles.container}>
             <TableOrder
                 data={data}
                 deleteProduct={deleteProduct}
                 updateProduct={updateProduct}
             />
+            <FooterScreen
+                goTo={confirmOrder}
+                title="Confirmar"
+                btnStyle={styles.btnConfirm}
+            />
         </View>
     );
 }
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#ffff",
+    },
+    btnConfirm: {
+        backgroundColor: "green",
+    },
+});
 
 function mockData() {
     const data = [];
-    for (let index = 1; index < 11; index++) {
+    for (let index = 1; index < 5; index++) {
         data.push({
             id: index,
             name: "Producto prueba " + index,

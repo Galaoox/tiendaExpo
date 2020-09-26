@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, FlatList, ScrollView } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Image, Text } from "react-native-elements";
-import { SafeAreaView } from "react-native-safe-area-context";
 import ListCategorys from "../components/categorys/ListCategorys";
-import FooterHome from "../components/home/FooterHome";
+import FooterScreen from "../components/FooterScreen";
 import ListProducts from "../components/products/ListProdutcs";
 import { SCREEN } from "../utils/common";
 
 export default function Home(props) {
+    const { navigation } = props;
     const [categorys, setCategorys] = useState([]);
     useEffect(() => {
         setCategorys(mockDataCategorys);
     }, []);
+
+    const viewOrder = () => {
+        navigation.navigate("order");
+    };
 
     return (
         <View style={styles.container}>
@@ -28,7 +32,11 @@ export default function Home(props) {
             <View style={styles.containerProducts}>
                 <ListProducts data={categorys} />
             </View>
-            <FooterHome />
+            <FooterScreen
+                goTo={viewOrder}
+                title="Ver pedido"
+                btnStyle={styles.btnOrder}
+            />
         </View>
     );
 }
@@ -50,6 +58,9 @@ const styles = StyleSheet.create({
     containerCategorys: {
         height: 130,
         marginBottom: 10,
+    },
+    btnOrder: {
+        backgroundColor: "#DC5641",
     },
 });
 function mockDataCategorys() {

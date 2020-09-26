@@ -1,21 +1,18 @@
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Button, Text } from "react-native-elements";
 
-export default function FooterHome() {
-    const navigation = useNavigation();
-    const goOrder = () => {
-        navigation.navigate("order");
-    };
+export default function FooterScreen(props) {
+    const { goTo, btnStyle, title } = props;
+
     return (
         <View style={styles.container}>
             <Text style={[styles.orderText]}>Tu orden:</Text>
             <Button
-                title="Ver pedido"
+                title={title}
                 type="solid"
-                buttonStyle={[styles.btn]}
-                onPress={goOrder}
+                buttonStyle={btnStyle}
+                onPress={goTo}
             />
             <Text>
                 <Text style={[styles.valueOrderText]}>Valor:</Text> $30.000
@@ -34,6 +31,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-evenly",
         alignItems: "center",
+        borderTopWidth: 2,
     },
     orderText: {
         fontWeight: "bold",
@@ -44,6 +42,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
     btn: {
-        backgroundColor: "#DC5641",
+        backgroundColor: "green",
     },
 });
